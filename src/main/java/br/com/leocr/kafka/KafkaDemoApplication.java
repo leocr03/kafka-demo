@@ -1,19 +1,27 @@
 package br.com.leocr.kafka;
 
 public class KafkaDemoApplication {
+
     public boolean execute(String text) {
-        final boolean result = true;
+        final boolean result;
+
+        if(produce(text)) {
+            result = consume();
+        } else {
+            result = false;
+        }
+
         return result;
     }
 
-    public Producer produce(String text) {
+    public boolean produce(String text) {
         final Producer producer = new Producer();
         producer.setText(text);
-        return producer;
+        return producer.produce();
     }
 
-    public Consumer consume() {
+    public boolean consume() {
         final Consumer consumer = new Consumer();
-        return consumer;
+        return consumer.consume();
     }
 }
