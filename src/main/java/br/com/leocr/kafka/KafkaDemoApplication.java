@@ -17,7 +17,6 @@ class KafkaDemoApplication {
 
     boolean produce(String text) {
         final Producer producer = new Producer(kakfaProducer);
-        producer.setText(text);
         return producer.produce(text);
     }
 
