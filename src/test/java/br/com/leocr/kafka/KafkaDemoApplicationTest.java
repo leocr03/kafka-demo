@@ -54,7 +54,8 @@ public class KafkaDemoApplicationTest {
 				new LinkedHashMap<TopicPartition, List<ConsumerRecord<Integer, String>>>();
 		final int partition = 1;
 		final TopicPartition key = new TopicPartition(topic, partition);
-		List<ConsumerRecord<Integer, String>> value = new LinkedList<ConsumerRecord<Integer, String>>();
+		@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+		final List<ConsumerRecord<Integer, String>> value = new LinkedList<ConsumerRecord<Integer, String>>();
 		records.put(key, value);
 		final ConsumerRecords<Integer, String> consumerRecords = new ConsumerRecords<Integer, String>(records);
 		when(kafkaConsumerMock.poll(timeout)).thenReturn(consumerRecords);
