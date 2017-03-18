@@ -34,7 +34,7 @@ public class ConsumerTest {
     @Test
     public void consume() {
         final String topic = "kafkaDemo";
-        final long timeout = 1000;
+        final long timeout = 100;
         final Map<TopicPartition, List<ConsumerRecord<Integer, String>>> records =
                 new LinkedHashMap<TopicPartition, List<ConsumerRecord<Integer, String>>>();
         final int partition = 1;

@@ -3,15 +3,38 @@ package br.com.leocr.kafka;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
-class KafkaDemoApplication {
+import java.util.Properties;
+
+public class KafkaDemoApplication {
 
     private KafkaProducer<Integer, String> kakfaProducer;
 
     private KafkaConsumer<Integer, String> kafkaConsumer;
 
-    boolean execute(String text) {
+    public KafkaDemoApplication() {
+        Properties producerProperties = new Properties();
+        producerProperties.put("bootstrap.servers", "localhost:9092");
+        producerProperties.put("key.serializer", "org.apache.kafka.common.serialization.IntegerSerializer");
+        producerProperties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        kakfaProducer = new KafkaProducer<Integer, String>(producerProperties);
+
+        Properties consumerProperties = new Properties();
+        consumerProperties.put("bootstrap.servers", "localhost:9092");
+        consumerProperties.put("group.id", "kafkaDemo");
+        consumerProperties.put("key.deserializer", "org.apache.kafka.common.serialization.IntegerDeserializer");
+        consumerProperties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        kafkaConsumer = new KafkaConsumer<Integer, String>(consumerProperties);
+    }
+
+    public boolean execute(String text) {
         final boolean result;
-        result = produce(text) && consume();
+        produce(text);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        result = consume();
         return result;
     }
 

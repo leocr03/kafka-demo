@@ -18,7 +18,8 @@ class Producer {
         final String topic = "kafkaDemo";
         final Integer key = 3;
         final ProducerRecord<Integer, String> record = new ProducerRecord<Integer, String>(topic, key, text);
-        Future<RecordMetadata> result = kafkaProducer.send(record);
+        final Future<RecordMetadata> result = kafkaProducer.send(record);
+        kafkaProducer.close();
         return result.isDone();
     }
 }

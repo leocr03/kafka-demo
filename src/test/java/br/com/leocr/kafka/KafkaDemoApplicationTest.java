@@ -49,7 +49,7 @@ public class KafkaDemoApplicationTest {
 		when(kafkaProducerMock.send(any(ProducerRecord.class))).thenReturn(futureMock);
 
 		final String topic = "kafkaDemo";
-		final long timeout = 1000;
+		final long timeout = 100;
 		final Map<TopicPartition, List<ConsumerRecord<Integer, String>>> records =
 				new LinkedHashMap<TopicPartition, List<ConsumerRecord<Integer, String>>>();
 		final int partition = 1;
