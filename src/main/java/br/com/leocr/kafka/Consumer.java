@@ -22,7 +22,10 @@ class Consumer {
         final TopicPartition topicPartition = new TopicPartition(topic, partition);
         final Collection<TopicPartition> partitions = Collections.singletonList(topicPartition);
         kafkaConsumer.assign(partitions);
+        final long offset = 49;
+        kafkaConsumer.seek(topicPartition, offset);
         final ConsumerRecords<Integer, String> consumerRecords = kafkaConsumer.poll(100);
+        kafkaConsumer.position(topicPartition);
         final boolean isEmpty = consumerRecords.isEmpty();
 
         for (ConsumerRecord<Integer, String> record : consumerRecords) {
