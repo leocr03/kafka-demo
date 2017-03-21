@@ -22,7 +22,7 @@ class Consumer {
         final TopicPartition topicPartition = new TopicPartition(topic, partition);
         final Collection<TopicPartition> partitions = Collections.singletonList(topicPartition);
         kafkaConsumer.assign(partitions);
-        final long offset = 49;
+        final long offset = 0; // it can be changed for an specific offset to start
         kafkaConsumer.seek(topicPartition, offset);
         final ConsumerRecords<Integer, String> consumerRecords = kafkaConsumer.poll(100);
         kafkaConsumer.position(topicPartition);

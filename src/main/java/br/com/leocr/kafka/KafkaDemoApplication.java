@@ -20,6 +20,7 @@ public class KafkaDemoApplication {
 
         Properties consumerProperties = new Properties();
         consumerProperties.put("bootstrap.servers", "localhost:9092");
+        consumerProperties.put("max.poll.records", "2000");
         consumerProperties.put("group.id", "kafkaDemo");
         consumerProperties.put("key.deserializer", "org.apache.kafka.common.serialization.IntegerDeserializer");
         consumerProperties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
